@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Jessica Katru — Portfolio
 
 Personal portfolio website built to showcase full-stack and AI engineering projects.
@@ -19,3 +20,6 @@ Python · Flask · MongoDB · JWT · bcrypt · JavaScript · HTML/CSS · Streaml
 - Email: jessicakatru05@gmail.com
 - LinkedIn: [jessica-katru](https://www.linkedin.com/in/jessica-katru-10b5953b7)
 - GitHub: [jessicakatru](https://github.com/jessicakatru)
+=======
+# portfolio
+>>>>>>> f28fd70010b8cfa3a88c882c7e77a07a184b0fb9
