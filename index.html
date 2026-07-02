@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jessica Katru — Software Engineer</title>
+<meta name="description" content="Jessica Katru — Full-stack developer and AI engineer building Flask, MongoDB and LLM-powered products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red: #F5B942;
+    --red-dark: #C98F1F;
+    --ink: #F2F2F2;
+    --paper: #141414;
+    --tint: #1F1B12;
+    --line: #2A2A2A;
+    --mono: 'JetBrains Mono', monospace;
+    --disp: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important;}
+  }
+  :focus-visible{outline:3px solid var(--red); outline-offset:3px;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,20,20,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1180px; margin:0 auto; padding:18px 32px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .nav-logo{font-family:var(--disp); font-weight:700; font-size:1.1rem; letter-spacing:-0.02em;}
+  .nav-logo span{color:var(--red);}
+  .nav-links{display:flex; gap:28px; font-family:var(--mono); font-size:0.78rem; letter-spacing:0.04em; text-transform:uppercase;}
+  .nav-links a{position:relative; padding-bottom:4px; color:var(--ink);}
+  .nav-links a::after{content:'';position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--red); transition:width .25s ease;}
+  .nav-links a:hover::after{width:100%;}
+  @media(max-width:640px){ .nav-links{display:none;} }
+
+  /* HERO */
+  .hero{
+    padding:96px 0 40px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--red); display:flex; align-items:center; gap:10px; margin-bottom:28px;
+  }
+  .eyebrow::before{content:''; width:8px; height:8px; background:var(--red); display:inline-block; animation:blink 1.6s infinite;}
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+  .hero h1{
+    font-family:var(--disp); font-weight:700;
+    font-size:clamp(3rem, 9vw, 6.4rem);
+    line-height:0.94; letter-spacing:-0.03em;
+    text-transform:uppercase;
+  }
+  .hero h1 .line{display:block; overflow:hidden;}
+  .hero h1 .line span{display:block; transform:translateY(110%); animation:rise .8s cubic-bezier(.22,1,.36,1) forwards;}
+  .hero h1 .line:nth-child(1) span{animation-delay:.05s;}
+  .hero h1 .line:nth-child(2) span{animation-delay:.15s; color:var(--red); -webkit-text-stroke:0; }
+  @keyframes rise{ to{transform:translateY(0);} }
+
+  .hero-sub{
+    display:flex; gap:48px; margin-top:36px; flex-wrap:wrap;
+    align-items:flex-start;
+  }
+  .hero-tagline{
+    font-size:1.15rem; max-width:420px; color:#B0B0B0;
+  }
+  .hero-meta{
+    font-family:var(--mono); font-size:0.82rem; color:#999;
+    display:flex; flex-direction:column; gap:6px; padding-left:24px; border-left:2px solid var(--red);
+  }
+  .hero-cta{ margin-top:40px; display:flex; gap:16px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono); font-size:0.82rem; text-transform:uppercase; letter-spacing:0.05em;
+    padding:14px 26px; border:2px solid var(--ink); display:inline-flex; align-items:center; gap:8px;
+    transition:all .2s ease;
+  }
+  .btn-solid{ background:#F2F2F2; color:#141414; border-color:#F2F2F2; }
+  .btn-solid:hover{ background:var(--red); border-color:var(--red); color:#141414; }
+  .btn-outline:hover{ background:var(--ink); color:var(--paper); }
+
+  /* MARQUEE */
+  .marquee{
+    background:#000000; color:#fff; overflow:hidden; white-space:nowrap;
+    border-bottom:1px solid var(--line);
+  }
+  .marquee-track{
+    display:inline-flex; gap:48px; padding:16px 0;
+    animation:scroll 26s linear infinite;
+  }
+  .marquee:hover .marquee-track{ animation-play-state:paused; }
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .marquee-track span{
+    font-family:var(--mono); font-size:0.85rem; letter-spacing:0.06em; text-transform:uppercase;
+    display:inline-flex; align-items:center; gap:48px;
+  }
+  .marquee-track span::after{content:'/'; color:var(--red);}
+
+  /* SECTION LABELS */
+  .sec-label{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--red); margin-bottom:14px; display:block;
+  }
+  .sec-title{
+    font-family:var(--disp); font-weight:700; font-size:clamp(1.8rem,4vw,2.8rem);
+    letter-spacing:-0.02em; text-transform:uppercase; margin-bottom:44px;
+  }
+  section{ padding:88px 0; border-bottom:1px solid var(--line); }
+
+  /* ABOUT */
+  .about-grid{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap:64px; }
+  @media(max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{ font-size:1.05rem; color:#B0B0B0; margin-bottom:18px; max-width:52ch; }
+  .about-text strong{ color:var(--ink); font-weight:600; }
+  .stat-block{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); }
+  .stat{ background:var(--paper); padding:26px; }
+  .stat b{ font-family:var(--disp); font-size:2.1rem; color:var(--red); display:block; }
+  .stat span{ font-family:var(--mono); font-size:0.72rem; text-transform:uppercase; color:#999; letter-spacing:0.04em; }
+
+  /* PROJECTS */
+  .project{
+    display:grid; grid-template-columns: 90px 1fr; gap:28px;
+    padding:36px 0; border-top:1px solid var(--line);
+    transition:background .2s ease;
+  }
+  .project:first-of-type{ border-top:none; }
+  .project:hover{ background:var(--tint); }
+  .project-index{ font-family:var(--disp); font-size:2.4rem; color:var(--line); font-weight:700; }
+  .project:hover .project-index{ color:var(--red); }
+  .project-head{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px; margin-bottom:10px;}
+  .project-title{ font-family:var(--disp); font-weight:700; font-size:1.5rem; letter-spacing:-0.01em; }
+  .project-links{ display:flex; gap:16px; font-family:var(--mono); font-size:0.75rem; text-transform:uppercase; }
+  .project-links a{ border-bottom:1px solid var(--ink); }
+  .project-links a:hover{ color:var(--red); border-color:var(--red); }
+  .project-desc{ color:#B0B0B0; max-width:62ch; margin-bottom:14px; }
+  .tag-row{ display:flex; gap:8px; flex-wrap:wrap; }
+  .tag{
+    font-family:var(--mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.03em;
+    padding:4px 10px; border:1px solid var(--line); color:#999;
+  }
+
+  /* SKILLS */
+  .skills-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  @media(max-width:800px){ .skills-grid{grid-template-columns:repeat(2,1fr);} }
+  .skill-cat{ background:var(--paper); padding:26px; }
+  .skill-cat h4{ font-family:var(--mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--red); margin-bottom:14px; }
+  .skill-cat ul{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .skill-cat li{ font-size:0.92rem; }
+
+  /* EDUCATION */
+  .edu-row{
+    display:grid; grid-template-columns: 160px 1fr 90px; gap:24px; align-items:baseline;
+    padding:22px 0; border-top:1px solid var(--line);
+  }
+  .edu-row:first-of-type{ border-top:none; }
+  @media(max-width:700px){ .edu-row{grid-template-columns:1fr; gap:4px; padding:18px 0;} }
+  .edu-date{ font-family:var(--mono); font-size:0.78rem; color:#999; }
+  .edu-name b{ font-size:1.02rem; }
+  .edu-name div{ font-size:0.88rem; color:#999; margin-top:2px;}
+  .edu-cgpa{ font-family:var(--disp); font-weight:700; font-size:1.2rem; color:var(--red); text-align:right; }
+
+  /* CONTACT */
+  .contact{ background:#000000; color:#fff; border-bottom:none; padding:100px 0; }
+  .contact .sec-label{ color:#ff5c52; }
+  .contact h2{
+    font-family:var(--disp); font-weight:700; text-transform:uppercase;
+    font-size:clamp(2.2rem,6vw,4.2rem); letter-spacing:-0.02em; line-height:1.02; max-width:14ch; margin-bottom:36px;
+  }
+  .contact-email{
+    font-family:var(--disp); font-size:clamp(1.4rem,3vw,2rem); color:var(--red);
+    display:inline-block; border-bottom:2px solid var(--red); padding-bottom:6px; margin-bottom:44px;
+  }
+  .contact-email:hover{ color:#fff; border-color:#fff; }
+  .contact-links{ display:flex; gap:36px; flex-wrap:wrap; font-family:var(--mono); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.04em; }
+  .contact-links a{ color:#aaa; border-bottom:1px solid transparent; padding-bottom:4px; }
+  .contact-links a:hover{ color:#fff; border-color:var(--red); }
+
+  footer{
+    background:#000000; color:#777; text-align:center; padding:24px 0 40px;
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.04em;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">JESSICA<span>.</span>K</div>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Open to Software Engineering Internships</div>
+    <h1>
+      <span class="line"><span>Jessica</span></span>
+      <span class="line"><span>Katru</span></span>
+    </h1>
+    <div class="hero-sub">
+      <p class="hero-tagline">Final-year CS engineering student who ships full-stack products end to end — Flask APIs, MongoDB, JWT auth, and LLM-powered features, deployed and working, not just prototyped.</p>
+      <div class="hero-meta">
+        <span>Amalapuram, Andhra Pradesh, India</span>
+        <span>B.Tech CSE · Class of 2027</span>
+        <span>github.com/jessicakatru</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#work">See the work ↓</a>
+      <a class="btn btn-outline" href="mailto:jessicakatru05@gmail.com">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Python</span><span>Flask</span><span>MongoDB</span><span>JWT</span><span>bcrypt</span><span>JavaScript</span><span>REST APIs</span><span>Streamlit</span><span>Groq API</span><span>Whisper</span><span>Sentence-BERT</span><span>Render</span><span>Netlify</span>
+    <span>Python</span><span>Flask</span><span>MongoDB</span><span>JWT</span><span>bcrypt</span><span>JavaScript</span><span>REST APIs</span><span>Streamlit</span><span>Groq API</span><span>Whisper</span><span>Sentence-BERT</span><span>Render</span><span>Netlify</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-text">
+      <span class="sec-label">About</span>
+      <p>I build backend systems and AI-powered tools, then take them all the way to production. My stack centers on <strong>Python and Flask</strong>, with <strong>MongoDB</strong> for data, <strong>JWT and bcrypt</strong> for auth, and increasingly, <strong>LLM APIs</strong> like Groq's LLaMA 3.3 for the harder problems — resume analysis, mock interviews, voice-based concept checking.</p>
+      <p>I care about the gap between "works on my machine" and "works for a stranger on the internet" — chasing down CORS errors, IP whitelisting, and environment variables until a deployed link actually holds up.</p>
+      <p>Currently looking for a software engineering or AI engineering internship at a product company, with the goal of converting to full-time.</p>
+    </div>
+    <div class="stat-block">
+      <div class="stat"><b>3</b><span>Deployed Products</span></div>
+      <div class="stat"><b>8.09</b><span>Current CGPA</span></div>
+      <div class="stat"><b>4th</b><span>Year, B.Tech CSE</span></div>
+      <div class="stat"><b>2</b><span>Languages Spoken</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <span class="sec-label">Selected Work</span>
+    <h2 class="sec-title">Projects</h2>
+
+    <div class="project">
+      <div class="project-index">01</div>
+      <div>
+        <div class="project-head">
+          <div class="project-title">Voice-Based Concept Understanding Analyzer</div>
+          <div class="project-links">
+            <a href="https://jessicakatru-voice-concept-analyzer.streamlit.app" target="_blank" rel="noopener">Live</a>
+            <a href="https://github.com/jessicakatru/voice-concept-analyzer" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+        <p class="project-desc">Built for the SmartBridge internship program. Records a spoken explanation, transcribes it with Whisper, scores conceptual understanding against a reference answer using Sentence-BERT, and generates a PDF feedback report with ReportLab.</p>
+        <div class="tag-row">
+          <span class="tag">Streamlit</span><span class="tag">Whisper</span><span class="tag">Sentence-BERT</span><span class="tag">ReportLab</span><span class="tag">Python</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-index">02</div>
+      <div>
+        <div class="project-head">
+          <div class="project-title">PrepMate AI</div>
+          <div class="project-links">
+            <a href="https://bucolic-kitten-552abe.netlify.app" target="_blank" rel="noopener">Live</a>
+            <a href="https://github.com/jessicakatru/prepmate-ai" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+        <p class="project-desc">An AI-powered interview prep platform: resume analyzer, mock interview simulator, DSA practice with hints, a company-specific question bank, and a progress tracker. Backend on Flask with MongoDB, LLM responses from Groq's LLaMA 3.3 70B, JWT-secured accounts, deployed on Render and Netlify.</p>
+        <div class="tag-row">
+          <span class="tag">Flask</span><span class="tag">MongoDB</span><span class="tag">Groq API</span><span class="tag">JWT</span><span class="tag">Render</span><span class="tag">Netlify</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-index">03</div>
+      <div>
+        <div class="project-head">
+          <div class="project-title">Job Tracker</div>
+          <div class="project-links">
+            <a href="https://job-tracker-jessica.netlify.app" target="_blank" rel="noopener">Live</a>
+            <a href="https://github.com/jessicakatru/job-tracker" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+        <p class="project-desc">A full-stack application for tracking job applications through Applied, Interview, and Offer stages. Flask REST API backend with JWT authentication and bcrypt password hashing, a coffee-brown themed responsive UI with status filters and a light/dark mode toggle.</p>
+        <div class="tag-row">
+          <span class="tag">Flask</span><span class="tag">MongoDB</span><span class="tag">JWT</span><span class="tag">bcrypt</span><span class="tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <span class="sec-label">Toolbox</span>
+    <h2 class="sec-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h4>Languages</h4>
+        <ul><li>Python</li><li>Java</li><li>JavaScript</li><li>SQL</li></ul>
+      </div>
+      <div class="skill-cat">
+        <h4>Web & APIs</h4>
+        <ul><li>Flask</li><li>REST APIs</li><li>JWT Auth</li><li>HTML / CSS</li></ul>
+      </div>
+      <div class="skill-cat">
+        <h4>Data & AI</h4>
+        <ul><li>MongoDB</li><li>Groq API (LLaMA 3.3)</li><li>Whisper</li><li>Sentence-BERT</li></ul>
+      </div>
+      <div class="skill-cat">
+        <h4>Tools & Platforms</h4>
+        <ul><li>Git / GitHub</li><li>Render</li><li>Netlify</li><li>Postman</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <span class="sec-label">Background</span>
+    <h2 class="sec-title">Education</h2>
+
+    <div class="edu-row">
+      <div class="edu-date">2023 — 2027</div>
+      <div class="edu-name"><b>Swarnandhra College of Engineering and Technology</b><div>B.Tech, Computer Science & Engineering</div></div>
+      <div class="edu-cgpa">8.09</div>
+    </div>
+    <div class="edu-row">
+      <div class="edu-date">2021 — 2023</div>
+      <div class="edu-name"><b>Sri Chaitanya Junior College</b><div>Board of Intermediate Education, Andhra Pradesh — MPC</div></div>
+      <div class="edu-cgpa">8.29</div>
+    </div>
+    <div class="edu-row">
+      <div class="edu-date">2020 — 2021</div>
+      <div class="edu-name"><b>Z.P.P. High School</b><div>Board of Secondary Education, Andhra Pradesh</div></div>
+      <div class="edu-cgpa">9.2</div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="sec-label">Contact</span>
+    <h2>Let's build something worth deploying.</h2>
+    <a class="contact-email" href="mailto:jessicakatru05@gmail.com">jessicakatru05@gmail.com</a>
+    <div class="contact-links">
+      <a href="tel:+916281864577">+91 62818 64577</a>
+      <a href="https://github.com/jessicakatru" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/jessica-katru-10b5953b7" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Jessica Katru. Built and deployed, not just designed.</footer>
+
+</body>
+</html>
